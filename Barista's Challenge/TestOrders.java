@@ -33,6 +33,7 @@ public class TestOrders {
         order4.addItems(item2);
         
         order3.display();
+        System.out.println(order3.getStatusMessage()); 
 
         
         
