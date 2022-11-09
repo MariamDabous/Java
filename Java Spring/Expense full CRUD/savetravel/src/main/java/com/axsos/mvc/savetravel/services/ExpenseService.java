@@ -37,6 +37,12 @@ public class ExpenseService {
 			return this.expenserepository.save(b);
 			
 		}
+	 
+	 public void deleteExpense(Long id) {
+		 expenserepository.deleteById(id);
+	 }
+	 
+	 
 
 	
 	

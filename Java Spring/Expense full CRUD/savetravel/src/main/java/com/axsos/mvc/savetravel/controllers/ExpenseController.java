@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +43,7 @@ public class ExpenseController {
 	 @GetMapping("/expenses/edit/{id}")
 	    public String edit(@PathVariable("id") Long id, Model model) {
 	        Expense expense = expenseService.findExpense(id);
-	        model.addAttribute("expense12", expense);
+	        model.addAttribute("expense", expense);
 	        return "edit.jsp";
 	    }
 	    
@@ -54,6 +55,18 @@ public class ExpenseController {
 	            expenseService.updateExpense(expense);
 	            return "redirect:/expenses";
 	        }
+	    }
+	    
+	    @DeleteMapping("/expenses/{id}")
+	    public String destroy(@PathVariable("id") Long id) {
+	    	expenseService.deleteExpense(id);
+	        return "redirect:/expenses";
+	    }
+	    
+	    @GetMapping("/expenses/{id}")
+	    public String showExpense(@PathVariable("id") Long id, Model model) {
+			model.addAttribute("oneExp", expenseService.findExpense(id));
+	        return "oneexpense.jsp";
 	    }
 
 	

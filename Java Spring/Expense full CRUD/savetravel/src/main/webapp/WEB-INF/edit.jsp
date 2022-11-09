@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>Edit Expense:</h1>
-<form:form action="/expenses/${expense12.id}" method="post" modelAttribute="expense">
+<form:form action="/expenses/${expense.id}" method="post" modelAttribute="expense">
 <input type="hidden" name="_method" value="put">
     <p>
         <form:label path="name">Expense Name:</form:label>
@@ -22,7 +22,7 @@
     <p>
         <form:label path="vendor">Vendor:</form:label>
         <form:errors path="vendor"/>
-        <form:textarea path="vendor"/>
+        <form:input path="vendor"/>
     </p>
     <p>
         <form:label path="amount">Amount:</form:label>
@@ -30,9 +30,9 @@
         <form:input type="number" path="amount"/>
     </p>    
     <p>
-        <form:label path="description">Language</form:label>
+        <form:label path="description">Description:</form:label>
         <form:errors path="description"/>
-        <form:input path="description"/>
+        <form:textarea path="description"/>
     </p>
     
     <input type="submit" value="Submit"/>
