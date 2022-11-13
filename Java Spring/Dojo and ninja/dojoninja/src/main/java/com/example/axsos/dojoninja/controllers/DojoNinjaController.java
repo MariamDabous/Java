@@ -31,7 +31,7 @@ public class DojoNinjaController {
     }
 	
 	@PostMapping("/createdojo")
-	public String create(@Valid @ModelAttribute("dojo") Dojo dojo, BindingResult result , Model model) {
+	public String create(@Valid @ModelAttribute("dojo") Dojo dojo, BindingResult result ) {
 		if (result.hasErrors()) {
             return "dojo.jsp";
         } else {

@@ -13,6 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.beans.factory.annotation.Required;
 
 @Entity
 @Table(name="categories")
@@ -20,6 +25,7 @@ public class Category {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
+	 	@NotEmpty
 	    private String name;
 	    @Column(updatable=false)
 	    private Date createdAt;

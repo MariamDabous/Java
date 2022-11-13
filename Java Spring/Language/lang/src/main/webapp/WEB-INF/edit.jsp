@@ -14,6 +14,27 @@
 <title>Insert title here</title>
 </head>
 <body>
+<h3><a href="/languages" >Dashboard</a></h3>
+<form:form action="/editlanguages/${language.id}" method="post" modelAttribute="language">
+<input type="hidden" name="_method" value="put">
+    <p>
+        <form:label path="name">Name:</form:label>
+        <form:errors path="name"/>
+        <form:input path="name"/>
+    </p>
+    <p>
+        <form:label path="creator">Creator:</form:label>
+        <form:errors path="creator"/>
+        <form:input path="creator"/>
+    </p>    
+    <p>
+        <form:label path="currentVersion">Version:</form:label>
+        <form:errors path="currentVersion"/>
+        <form:textarea path="currentVersion"/>
+    </p>
+    
+    <input type="submit" value="Submit"/>
+</form:form>	
 
 </body>
 </html>

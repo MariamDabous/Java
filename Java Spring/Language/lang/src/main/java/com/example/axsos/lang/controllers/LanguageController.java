@@ -25,14 +25,14 @@ public class LanguageController {
 	@GetMapping("/languages")
     public String newLanguage(@ModelAttribute("language") Language language, Model model) {
 		model.addAttribute("languages",languageService.alllanguages());
-        return "index.jsp";
+        return "all.jsp";
     }
 	
-	 @PostMapping("/languages")
+	 @PostMapping("/createlang")
 	    public String create(@Valid @ModelAttribute("language") Language language, BindingResult result , Model model) {
 		 model.addAttribute("languages",languageService.alllanguages());  ///we have to put model to show the info in the table when there is an error
 		 if (result.hasErrors()) {
-	            return "index.jsp";
+	            return "all.jsp";
 	        } else {
 	            languageService.createLanguage(language);
 	            return "redirect:/languages";
@@ -46,7 +46,7 @@ public class LanguageController {
 	        return "edit.jsp";
 	    }
 	    
-	    @PutMapping("/languages/{id}")
+	    @PutMapping("/editlanguages/{id}")
 	    public String update(@Valid @ModelAttribute("language") Language language, BindingResult result) {
 	    	if (result.hasErrors()) {
 	            return "edit.jsp";
@@ -56,7 +56,13 @@ public class LanguageController {
 	        }
 	    }
 	    
-	    @DeleteMapping("/languages/{id}")
+//	    @DeleteMapping("/languages/{id}")
+//	    public String destroy(@PathVariable("id") Long id) {
+//	    	languageService.deleteLanguage(id);
+//	        return "redirect:/languages";
+//	    }
+	    
+	    @GetMapping("/delete/languages/{id}")
 	    public String destroy(@PathVariable("id") Long id) {
 	    	languageService.deleteLanguage(id);
 	        return "redirect:/languages";
@@ -64,8 +70,8 @@ public class LanguageController {
 	    
 	    @GetMapping("/languages/{id}")
 	    public String showLanguage(@PathVariable("id") Long id, Model model) {
-			model.addAttribute("oneExp", languageService.findLanguage(id));
-	        return "onelanguage.jsp";
+			model.addAttribute("onelang", languageService.findLanguage(id));
+	        return "show.jsp";
 	    }
 
 	
