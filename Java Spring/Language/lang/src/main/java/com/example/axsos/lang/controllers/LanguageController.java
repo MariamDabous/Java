@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.axsos.lang.models.Language;
 import com.example.axsos.lang.services.LanguageService;
@@ -55,6 +57,7 @@ public class LanguageController {
 	            return "redirect:/languages";
 	        }
 	    }
+	    
 	    
 //	    @DeleteMapping("/languages/{id}")
 //	    public String destroy(@PathVariable("id") Long id) {

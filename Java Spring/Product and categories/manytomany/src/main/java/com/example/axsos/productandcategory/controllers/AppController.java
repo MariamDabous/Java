@@ -60,6 +60,7 @@ public class AppController {
 	@GetMapping("/category/{id}")
     public String index4(@PathVariable("id") Long id ,Model model, @ModelAttribute("category") Category category) {
 		model.addAttribute("categories", appService.findCategory(id));
+		System.out.println(appService.findCategory(id));
 		model.addAttribute("products", appService.notselected2(category));
         return "onecategory.jsp";
     }
