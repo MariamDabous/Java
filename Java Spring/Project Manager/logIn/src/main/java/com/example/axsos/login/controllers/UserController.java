@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.axsos.login.models.LoginUser;
+import com.example.axsos.login.models.Project;
 import com.example.axsos.login.models.User;
+import com.example.axsos.login.services.ProjectService;
 import com.example.axsos.login.services.UserService;
 
 
@@ -21,12 +23,16 @@ public class UserController {
 	
 	@Autowired
     private UserService userServ;
+	
+	@Autowired
+	private ProjectService projectService;
+	
    
    @GetMapping("/")
    public String index(Model model, HttpSession session) {
    	
    	if (session.getAttribute("userId")!= null){
-   		return "redirect:/success";
+   		return "redirect:/dashboard";
    	}
    	
        model.addAttribute("newUser", new User());
@@ -46,7 +52,7 @@ public class UserController {
            return "login.jsp";
        }
        session.setAttribute("userId", registeredUser.getId());
-       return "redirect:/success";
+       return "redirect:/dashboard";
      
    }
    
@@ -63,16 +69,16 @@ public class UserController {
        }
        
        session.setAttribute("userId", user.getId());
-       return "redirect:/success";
+       return "redirect:/dashboard";
    }
    
-   @GetMapping ("/success")
+   @GetMapping ("/dashboard")
    public String home(Model model, HttpSession session){
    	if (session.getAttribute("userId")!= null){
    		Long userId = (Long) session.getAttribute("userId");
    		User currentUser = userServ.findUserById(userId);
    		model.addAttribute("currentUser", currentUser);	
-   		return "success.jsp";
+   		return "dashboard.jsp";
    	}
    	return "redirect:/";
    	  		
@@ -83,5 +89,32 @@ public class UserController {
    	session.invalidate();
    	return "redirect:/";		
    }
+   
+   /////////////////create project////////////
+   @GetMapping("/project/new")
+   public String index2(@ModelAttribute("project") Project project, Model model, HttpSession session) {
+	   if (session.getAttribute("userId")!= null){
+	   		Long userId = (Long) session.getAttribute("userId");
+	   		User currentUser = userServ.findUserById(userId);
+	   		model.addAttribute("currentUser", currentUser);
+	   		return "projectform.jsp";
+   }
+	   return "redirect:/";
+   }
+   
+//   @PostMapping("/createproject")
+//	public String create(@Valid @ModelAttribute("project") Project project, BindingResult result,Model model, HttpSession session ) {
+//		if (result.hasErrors()) {
+//           return "projectform.jsp";
+//       } else {
+//    	   Long userId = (Long) session.getAttribute("userId");
+//	   	   User currentUser = userServ.findUserById(userId);
+////	   	   project.setUser(currentUser);
+//	   	   System.out.println("The user is"+currentUser);
+//           projectService.createProject(project);
+//           System.out.println("The project is"+project);
+//           return "redirect:/project/new";
+//       }
+//	}
    
 }

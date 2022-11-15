@@ -3,11 +3,18 @@ package com.example.axsos.login.models;
 
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -45,6 +52,23 @@ public class User {
 		private Date updatedAt;
 	    public User() {}
 	    
+	    
+	    @Column(updatable=false)
+	    @OneToMany(mappedBy="leader", fetch = FetchType.LAZY)
+	    private List<Project> projectleader;
+	    
+	    
+	    
+	    @ManyToMany(fetch = FetchType.LAZY)
+	    @JoinTable(
+	        name = "users_projects", 
+	        joinColumns = @JoinColumn(name = "user_id"), 
+	        inverseJoinColumns = @JoinColumn(name = "project_id")
+	    )
+	    private List<Project> projects;
+	    
+	    
+	    
 		public User(String userName, String email, String password, String confirm) {
 			this.userName = userName;
 			this.email = email;
@@ -56,6 +80,18 @@ public class User {
 			}
 
 
+		public List<Project> getProjectleader() {
+			return projectleader;
+		}
+		public void setProjectleader(List<Project> projectleader) {
+			this.projectleader = projectleader;
+		}
+		public List<Project> getProjects() {
+			return projects;
+		}
+		public void setProjects(List<Project> projects) {
+			this.projects = projects;
+		}
 		public void setId(Long id) {
 				this.id = id;
 			}
