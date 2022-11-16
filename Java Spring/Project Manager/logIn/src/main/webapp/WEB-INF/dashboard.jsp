@@ -12,22 +12,44 @@
 <h2 class="welcome">Welcome ,<c:out value="${currentUser.userName}"/></h2>
 <p>this is your dashboard.Nothing to see here yet.</p>
 <a href="/logout">logout</a><br>
-<a href="/project/new">new project</a>
-<table border="1">
+<form:form action="/projects/new" method="get">
+     <input type="submit" value="+ new project"/>
+</form:form>
+     <p>All projects <p/>
+     <table border="1">
 	<tr>
-		<th>ID</th>
-		<th>Title</th>
-		<th>Author</th>
-		<th>posted by</th>
+		<th>Project</th>
+		<th>Team Lead</th>
+		<th>Due Date</th>
+		<th>Actions</th>
 	</tr>
-	<c:forEach var="book" items="${books}">
+	<c:forEach var="project" items="${projects}">
 	<tr>
-		<td> ${book.id}</td>
-		<td><a href="/books/${book.id}">${book.title}</a></td>
-		<td>${book.author}</td>
-		<td>${book.user.userName} </td>
+		<td> ${project.title}</td>
+		<td>${project.leader.userName}</td>
+		<td>${project.date}</td>
+		<td>0</td>
 	</tr>
 	</c:forEach>
+	
 </table>
+     
+     <p>Your projects <p/>
+     <table border="1">
+			<tr>
+				<th>Project</th>
+				<th>Team Lead</th>
+				<th>Due Date</th>
+				<th>Actions</th>
+			</tr>
+			<c:forEach var="project" items="${leaderproject}">
+			<tr>
+				<td> ${project.title}</td>
+				<td> ${project.leader.userName}</td>
+				<td> ${project.date}</td>
+				<td>0</td>
+			</tr>
+			</c:forEach>
+	</table>
 </body>
 </html>

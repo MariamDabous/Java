@@ -16,7 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="projects")
@@ -32,7 +35,8 @@ public class Project {
 	 	@NotEmpty
 	    private String description;
 	 	
-	 	@NotEmpty
+	 	@Future
+	 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	    private Date date;
 	 	
 	 	
@@ -53,7 +57,7 @@ public class Project {
 
 	    
 	    @ManyToOne(fetch = FetchType.LAZY)
-		@JoinColumn(name="project_id")
+		@JoinColumn(name="leader_id")
 		private User leader;
 	    
 	   
