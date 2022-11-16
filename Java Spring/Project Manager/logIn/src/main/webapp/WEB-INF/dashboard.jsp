@@ -25,7 +25,7 @@
 	</tr>
 	<c:forEach var="project" items="${projects}">
 	<tr>
-		<td> ${project.title}</td>
+		<td><a href="/project/${project.id}" > ${project.title}</a></td>
 		<td>${project.leader.userName}</td>
 		<td>${project.date}</td>
 		<td>0</td>
@@ -44,7 +44,7 @@
 			</tr>
 			<c:forEach var="project" items="${leaderproject}">
 			<tr>
-				<td> ${project.title}</td>
+				<td><a href="/project/${project.id}" > ${project.title}</a></td>
 				<td> ${project.leader.userName}</td>
 				<td> ${project.date}</td>
 				<td>0</td>
