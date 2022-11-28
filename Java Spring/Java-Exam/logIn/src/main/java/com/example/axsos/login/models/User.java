@@ -1,13 +1,18 @@
 package com.example.axsos.login.models;
 
-
-
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -45,6 +50,27 @@ public class User {
 		private Date updatedAt;
 	    public User() {}
 	    
+	    @ManyToMany(fetch = FetchType.LAZY)
+	    @JoinTable(
+	        name = "players_teams", 
+	        joinColumns = @JoinColumn(name = "user_id"), 
+	        inverseJoinColumns = @JoinColumn(name = "team_id")
+	    )
+	    private List<Team> teams;
+	    
+	    
+	    @OneToMany(mappedBy="creator", fetch = FetchType.LAZY)
+	    private List<Team> teamscreated;
+	    
+	    
+	    
+	    
+		public List<Team> getTeamscreated() {
+			return teamscreated;
+		}
+		public void setTeamscreated(List<Team> teamscreated) {
+			this.teamscreated = teamscreated;
+		}
 		public User(String userName, String email, String password, String confirm) {
 			this.userName = userName;
 			this.email = email;
@@ -54,8 +80,15 @@ public class User {
 		public Long getId() {
 				return id;
 			}
+		
 
 
+		public List<Team> getTeams() {
+			return teams;
+		}
+		public void setTeams(List<Team> teams) {
+			this.teams = teams;
+		}
 		public void setId(Long id) {
 				this.id = id;
 			}

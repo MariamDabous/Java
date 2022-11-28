@@ -1,19 +1,16 @@
 @charset "ISO-8859-1";
 .main{
-	display: flex;
-	justify-content: space-around;
-	margin-left: 10%;
+	width:1200px;
+	margin:0 auto;
 }
 .login{
-	width:50%;
+	width:1200px;
+	margin:0 auto;
 }
 .register{
-	width:50%;
-	height:400px;
+	width:1200px;
+	margin:0 auto;
 }
 .input{
 	background-color: white;	
-}
-.welcome{
-	color:RGB(153, 0, 255);
 }

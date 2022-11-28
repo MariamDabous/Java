@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import com.example.axsos.login.models.LoginUser;
+import com.example.axsos.login.models.Team;
 import com.example.axsos.login.models.User;
 import com.example.axsos.login.repositories.UserRepository;
 
@@ -89,6 +90,10 @@ public class UserService {
 			return user;
 		}
     }
+    
+    public List<User> notselected2(Team a){
+		return userRepo.findByTeamsNotContains(a);
+	}
     
     
 }
